@@ -22,9 +22,8 @@ if (!empty($_POST)) {
 
 		if ($key !== 'new_name' && $key[0] === 'n' && $value != '' && $_POST['new_name'] != '') {
 			$i = substr($key, 1);
-			$types = explode("_", $i);
+			$types = explode("&", $i);
 			mysqli_query($connect, 'alter table '.$table.' change '.$types[0].' '.$_POST['new_name'].' '.$types[1]);
-			header('Location: table.php?into='.$table);
 		}
 	}
 }
@@ -81,7 +80,7 @@ $res = mysqli_query($connect, $sql);
 					<form action="" method="post">
 						<input type="text" name="new_name">
 						<br>
-						<input type="submit" name="<?= 'n'.$data['Field'].'_'.$data['Type']; ?>" value="Изменить название">
+						<input type="submit" name="<?= 'n'.$data['Field'].'&'.$data['Type']; ?>" value="Изменить название">
 					</form>
 				</td>
 			</tr>
